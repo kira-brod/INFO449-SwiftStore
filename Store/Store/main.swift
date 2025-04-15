@@ -66,6 +66,8 @@ class Register {
     var receipt: Receipt
     var subtotalInt: Int
     
+    let receiptReturn = Receipt()
+    
     init(){
         self.receipt = Receipt()
         self.subtotalInt = 0
@@ -81,8 +83,17 @@ class Register {
     }
     
     func total() -> Receipt {
-        let receiptReturn = receipt
-//        receipt.itemList.removeAll()
+        
+        if (!receiptReturn.itemList.isEmpty){
+            receiptReturn.itemList.removeAll()
+        }
+        
+        for item in receipt.itemList {
+            receiptReturn.itemList.append(item)
+        }
+        
+        receipt.itemList.removeAll()
+        
         return receiptReturn
         
     }
